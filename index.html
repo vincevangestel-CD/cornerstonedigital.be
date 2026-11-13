@@ -214,8 +214,11 @@ section { padding: 80px 0; }
 .foot a { color: inherit; }
 
 /* Cookiemelding */
-.consent { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 20; max-width: 560px; margin-left: auto; background: var(--card); border: 1px solid var(--ink); padding: 20px 22px; display: grid; gap: 14px; box-shadow: 0 10px 30px rgba(18,27,57,.18); font-size: 15px; }
-.consent[hidden] { display: none; }
+.consent-wrap { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 16px; background: rgba(18,27,57,.6); }
+.consent-wrap[hidden] { display: none; }
+.consent { width: 100%; max-width: 540px; background: var(--card); border-top: 6px solid var(--purple); padding: 32px 34px 34px; display: grid; gap: 16px; box-shadow: 0 24px 60px rgba(18,27,57,.35); font-size: 16px; }
+.consent h2 { font-size: 1.7rem; }
+.consent .row button { flex: 1 1 160px; padding: 13px 18px; font-size: 17px; }
 .consent p { color: var(--slate); }
 .consent .row { display: flex; gap: 10px; flex-wrap: wrap; }
 .consent button { font-family: var(--display); font-weight: 500; font-size: 15px; padding: 9px 16px; border: 1.5px solid var(--ink); background: var(--ink); color: #fff; cursor: pointer; }
@@ -430,11 +433,14 @@ section { padding: 80px 0; }
   </div>
 </footer>
 
-<div class="consent" id="consent" role="dialog" aria-label="Cookievoorkeuren" hidden>
-  <p>Deze site gebruikt Google Analytics om te meten hoe de pagina gebruikt wordt. Dat gebeurt alleen als je daarmee akkoord gaat. <a href="privacy.html" style="color:var(--ink)">Privacyverklaring</a></p>
-  <div class="row">
-    <button type="button" id="consent-yes">Akkoord</button>
-    <button type="button" id="consent-no" class="ghost">Weigeren</button>
+<div class="consent-wrap" id="consent" hidden>
+  <div class="consent" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <h2 id="consent-title">Mag deze site je bezoek meten?</h2>
+    <p>Deze site meet bezoeken met Google Analytics. Met je akkoord gebeurt dat met cookies. Zonder akkoord gaan er alleen anonieme signalen zonder cookies naar Google. <a href="privacy.html" style="color:var(--ink)">Privacyverklaring</a></p>
+    <div class="row">
+      <button type="button" id="consent-yes">Akkoord</button>
+      <button type="button" id="consent-no" class="ghost">Weigeren</button>
+    </div>
   </div>
 </div>
 <script>
@@ -449,8 +455,9 @@ section { padding: 80px 0; }
   }
   document.getElementById('consent-yes').addEventListener('click', function () { choose('granted'); });
   document.getElementById('consent-no').addEventListener('click', function () { choose('denied'); });
-  document.getElementById('consent-open').addEventListener('click', function () { box.hidden = false; });
-  if (!stored()) box.hidden = false;
+  function open() { box.hidden = false; document.getElementById('consent-yes').focus(); }
+  document.getElementById('consent-open').addEventListener('click', open);
+  if (!stored()) open();
 })();
 </script>
 
