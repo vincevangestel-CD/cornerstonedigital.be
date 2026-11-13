@@ -10,6 +10,9 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.cornerstonedigital.be/">
 <link rel="canonical" href="https://www.cornerstonedigital.be/">
+<link rel="alternate" hreflang="nl" href="https://www.cornerstonedigital.be/">
+<link rel="alternate" hreflang="en" href="https://www.cornerstonedigital.be/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.cornerstonedigital.be/">
 <meta property="og:image" content="https://www.cornerstonedigital.be/assets/og.png">
 <meta property="og:locale" content="nl_BE">
 <meta name="twitter:card" content="summary_large_image">
@@ -100,6 +103,10 @@ p { margin: 0; }
 .top nav a.btn { color: #fff; font-size: 15px; padding: 9px 16px; }
 .top nav a.btn:hover { color: var(--ink); }
 
+.lang { display: inline-flex; gap: 2px; font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; border: 1px solid var(--line); }
+.lang a, .lang span { padding: 5px 9px; text-decoration: none; color: var(--slate); }
+.lang [aria-current] { background: var(--ink); color: #fff; }
+.lang a:hover { color: var(--ink); background: var(--card); }
 /* Hero */
 .hero { padding: 72px 0 80px; }
 .hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 48px; align-items: center; }
@@ -192,7 +199,7 @@ section { padding: 80px 0; }
   .steps, .tools, .advice { grid-template-columns: 1fr; }
   .step + .step { border-left: 0; }
   section { padding: 56px 0; }
-  .top nav a:not(.btn) { display: none; }
+  .top nav > a:not(.btn) { display: none; }
 }
 @media (max-width: 420px) {
   .facts div { grid-template-columns: 1fr; gap: 2px; }
@@ -239,6 +246,7 @@ section { padding: 80px 0; }
       <a href="#aanpak">Aanpak</a>
       <a href="#tools">Tools</a>
       <a href="#over">Over</a>
+      <div class="lang" aria-label="Taal"><span aria-current="true">NL</span><a href="en/" lang="en" hreflang="en">EN</a></div>
       <a class="btn" href="#contact">Contact</a>
     </nav>
   </div>
