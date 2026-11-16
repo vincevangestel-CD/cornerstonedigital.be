@@ -25,6 +25,8 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
 try { if (localStorage.getItem('cd-consent') === 'granted') gtag('consent', 'update', { analytics_storage: 'granted' }); } catch (e) {}
+window.cdPage = { page_type: 'home', page_language: 'nl' };
+dataLayer.push({ event: 'page_view', page_type: cdPage.page_type, page_language: cdPage.page_language });
 </script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -458,7 +460,7 @@ section { padding: 80px 0; }
   function choose(v) {
     try { localStorage.setItem('cd-consent', v); } catch (e) {}
     gtag('consent', 'update', { analytics_storage: v });
-    dataLayer.push({ event: 'consent_update', analytics_consent: v });
+    dataLayer.push({ event: 'consent_update', analytics_consent: v, page_type: cdPage.page_type, page_language: cdPage.page_language });
     box.hidden = true;
   }
   document.getElementById('consent-yes').addEventListener('click', function () { choose('granted'); });
@@ -469,5 +471,6 @@ section { padding: 80px 0; }
 })();
 </script>
 
+<script src="assets/js/datalayer.js" defer></script>
 </body>
 </html>
